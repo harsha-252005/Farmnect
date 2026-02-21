@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    
+    <style>
+    /* Basic styles for the OTP verification page */
+    #otp-container {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        text-align: center;
+        background-color: #f9f9f9;
+    }
+
+    input[type="tel"], input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    #verification-result {
+        margin-top: 20px;
+        font-weight: bold;
+        color: red;
+    }
+    </style>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js"></script>
+    <script src="farmerlogin.js" type="module"></script>
+</head>
+<body>
+    <div id="otp-container">
+        <h2>Phone Number Verification</h2>
+        <form id="phone-form">
+            <input type="tel" id="phone-number" placeholder="Enter your phone number" required>
+            <div id="recaptcha-container"></div>
+            <button type="submit">Send OTP</button>
+        </form>
+
+        <form id="otp-form" style="display:none;">
+            <input type="text" id="otp-code" placeholder="Enter OTP" required>
+            <button type="submit">Verify OTP</button>
+        </form>
+
+        <p id="verification-result"></p>
+    </div>
+</body>
+</html>

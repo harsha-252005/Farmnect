@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trader Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #000; /* Default font color to black */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px; /* Restrict container width */
+            background-color: #fff; /* White container */
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px; /* Rounded corners for the container */
+            color: #000; /* Ensure the text color inside the container is black */
+        }
+
+        h2 {
+            text-align: center;
+            color: black; /* Header color */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="email"], input[type="tel"], input[type="number"], textarea {
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            color: #000; /* Ensure the input text color is black */
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #f15111;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #8ea890;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Trader Registration</h2>
+        <form id="registrationForm" onsubmit="return validateForm()">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required><br>
+
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" required></textarea><br>
+
+            <label for="businessName">Business Name:</label>
+            <input type="text" id="businessName" name="businessName" required><br>
+
+            <label for="licenseID">State Unified License ID:</label>
+            <input type="text" id="licenseID" name="licenseID" required><br>
+
+            <label for="businessType">Type of Business:</label>
+            <input type="text" id="businessType" name="businessType" required><br>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const businessName = document.getElementById('businessName').value;
+            const licenseID = document.getElementById('licenseID').value;
+            const businessType = document.getElementById('businessType').value;
+
+            if (!name || !email || !phone || !businessName || !licenseID || !businessType) {
+                alert('Please fill out all fields.');
+                return false;
+            }
+
+            alert('Registration successful!');
+            return true;
+        }
+    </script>
+</body>
+</html>

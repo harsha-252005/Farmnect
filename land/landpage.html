@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .tab-container {
+            margin-left:10px;
+            display: flex;
+            gap: 10px;
+            padding:10px;
+        }
+
+        .tablink {
+            background: linear-gradient(135deg, #4caf50, #41B06E);
+            border: none;
+            height: 50px;
+            width: 250px;
+            border-radius: 25px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            line-height: 50px;
+        }
+
+        .tablink:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .tablink.active {
+            border-bottom: 5px solid #aee713;
+        }
+
+        .headinglogo {
+            background: linear-gradient(to right, #27a75a, #34c8cd);
+            height: 70px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 3em;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            background-color: #ffffff;
+            border: 2px solid #ddd;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin: 20px;
+        }
+
+        .container.active {
+            display: flex;
+        }
+
+        h2 {
+            background-color: #ed823a ;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .tg th, .tg td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .tg th {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .tg tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .tg tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        .tg tr:hover {
+            background-color: #d9f9d9;
+        }
+
+        .user-image {
+            position: absolute;
+            top: 85px;
+            left: 80%;
+            font-size: 12px;
+            color: black;
+        }
+
+        .user-info {
+            position: absolute;
+            top: 82px;
+            left: 83%;
+            border-width:10px;
+            border:solid;
+            padding:5px;
+            border-color:white;
+        }
+        img{
+            border-radius:100px;
+        }
+        .user-info span {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="headinglogo">
+        <h1>FarmNect</h1>
+    </div>
+   
+    <div class="tab-container">
+        <div class="tablink" onclick="window.location.href='landpage.html'">Land Rental and Lease Page</div>
+        <div class="tablink" onclick="window.location.href='../product/productpage.html'">Product Page</div>
+    </div>
+    
+    <div class="user-image">
+        <img src="data:image/png;base64,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" alt="User Image" width="30" height="30">
+            <br>
+    </div>
+    <div class="user-info">
+        <span id="userName"></span> <span id="userId"></span>
+    </div>
+<div id="LandTab" class="container">
+        <h2>Land Rental and Lease Details</h2><br>
+        <div class="contents">
+
+            <table class="tg"><thead>
+              <tr>
+                <th>Serial</th>
+                <th>Land ID</th>
+                <th>Land Area</th>
+                <th>Rental Price</th>
+                <th>Lease Duration</th>
+                <th>Availability</th>
+                <th>Uploaded Date</th>
+                <th>Status</th>
+                <th>Area</th>
+                <th>District</th>
+                <th>State</th>
+              </tr></thead>
+            <tbody id="landlist">
+               
+                                
+            </tbody>
+            </table>
+            
+            </div>
+    </div>
+    
+   
+    <script src="landpage.js" type="module">
+        
+    </script>
+</body>
+</html>

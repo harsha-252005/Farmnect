@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmnect Payment Portal</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color:#E2DAD6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+        }
+
+        .container {
+            width: 60%;
+            padding: 40px;
+            background-color:#F5EDED ;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        h2 {
+            color:black;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+
+        .amount-display {
+            font-size: 28px;
+            color: #fff;
+            margin-bottom: 40px;
+            background-color: rgba(76, 175, 80, 0.7);
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .payment-methods {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        .payment-methods img {
+            width: 70px;
+            height:auto;
+            cursor: pointer;
+            border-radius:10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .payment-methods img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+        }
+
+        .payment-details {
+            display: none;
+            width: 80%;
+            margin-bottom: 30px;
+        }
+
+        .payment-details.active {
+            display: block;
+            text-align: left;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 18px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        #confirm-button {
+            width: 50%;
+            padding: 15px;
+            background-color: #7FA1C3;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #confirm-button:hover {
+            background-color: #45a049;
+        }
+
+        .input-group input::placeholder {
+            color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Farmnect Payment Portal</h2>
+        <div class="amount-display">₹ 1000</div>
+        <div class="payment-methods">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa" onclick="selectPaymentMethod('card')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="MasterCard" onclick="selectPaymentMethod('card')">
+            <img src="paypal.jpg" alt="PayPal" onclick="selectPaymentMethod('paypal')">
+            <img src= "upi.jpg"alt="RuPay" onclick="selectPaymentMethod('card')">
+            <img src="https://www.shutterstock.com/image-vector/kerala-india-19-07-2023-260nw-2334125251.jpg" alt="UPI" onclick="selectPaymentMethod('upi')">
+        </div>
+
+        <div id="cardDetails" class="payment-details">
+            <div class="input-group">
+                <label for="cardNumber">Card Number:</label>
+                <input type="text" id="cardNumber" name="cardNumber" placeholder="Enter your card number">
+            </div>
+            <div class="input-group">
+                <label for="expiryDate">Expiry Date:</label>
+                <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY">
+            </div>
+            <div class="input-group">
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" name="cvv" placeholder="Enter the CVV">
+            </div>
+        </div>
+
+        <div id="upiDetails" class="payment-details">
+            <div class="input-group">
+                <label for="upiId">UPI ID:</label>
+                <input type="text" id="upiId" name="upiId" placeholder="Enter your UPI ID">
+                <br>
+                <center>
+              <img src="qrcode.png" height="300" width="300" >
+                </center>
+            </div>
+        </div>
+
+        <div id="paypalDetails" class="payment-details">
+            <div class="input-group">
+                <label for="paypalEmail">PayPal Email:</label>
+                <input type="text" id="paypalEmail" name="paypalEmail" placeholder="Enter your PayPal email">
+            </div>
+        </div>
+
+        <button id="confirm-button">Confirm Payment</button>
+    </div>
+    <script>
+        function selectPaymentMethod(method) {
+            const paymentDetails = document.querySelectorAll('.payment-details');
+            paymentDetails.forEach(detail => detail.classList.remove('active'));
+
+            if (method === 'card') {
+                document.getElementById('cardDetails').classList.add('active');
+            } else if (method === 'upi') {
+                document.getElementById('upiDetails').classList.add('active');
+            } else if (method === 'paypal') {
+                document.getElementById('paypalDetails').classList.add('active');
+            }
+        }
+
+        function confirmPayment() {
+            alert('Payment Confirmed! Thank you for using Farmnect.');
+        }
+
+    </script>
+    <script src="payment.js" type="module">
+
+    </script>
+</body>
+</html>

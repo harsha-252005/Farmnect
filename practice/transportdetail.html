@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trader Vehicle Details</title>
+    <style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f3f3f3; /* Light gray background */
+        margin: 0;
+        padding: 0;
+        color: #333; /* Dark gray text color */
+    }
+
+    .container {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        border-top: 5px solid green; /* Green border on top */
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: green; /* Green title color */
+        font-weight: 600;
+        font-size: 1.8em;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        margin-bottom: 8px;
+        color: #666; /* Lighter gray for labels */
+        font-weight: 500;
+    }
+
+    input {
+        margin-bottom: 20px;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    input:focus {
+        border-color: orange;
+        box-shadow: 0 0 5px rgba(255, 165, 0, 0.5);
+        outline: none;
+    }
+
+    button {
+        padding: 12px;
+        background: linear-gradient(45deg, orange, darkorange); /* Gradient button color */
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    button:hover {
+        background-color: darkorange;
+        transform: scale(1.05);
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Enter Vehicle Details</h2>
+        <form id="vehicleDetailsForm">
+            <label for="vehicleNumber">Vehicle Number:</label>
+            <input type="text" id="vehicleNumber" name="vehicleNumber" required>
+
+            <label for="driverName">Driver Name:</label>
+            <input type="text" id="driverName" name="driverName" required>
+
+            <label for="day">Days:</label>
+            <input type="text" id="day" name="day" required>
+
+            <label for="today">Today Date:</label>
+            <input type="text" id="today" name="today" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+   
+    </script>
+    <script src="transportdetail.js" type="module"></script>
+</body>
+</html>

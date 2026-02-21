@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agreement Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #e8f5e9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #2e7d32;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 90vw;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #81c784;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            text-align: center;
+            color: #1b5e20;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #388e3c;
+        }
+
+        .info-box {
+            background-color: #f1f8e9;
+            border: 1px solid #c8e6c9;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 5px 0;
+            font-size: 1rem;
+            color: #2e7d32;
+            word-wrap: break-word;
+        }
+
+        button {
+            width: 100%;
+            max-width: 60%;
+            padding: 12px;
+            background-color: #66bb6a;
+            color: #ffffff;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 20px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #43a047;
+        }
+
+        .agreement-container {
+            display: none;
+            margin: 20px auto;
+            background-color: #e0f2f1;
+            padding: 15px;
+            border-radius: 12px;
+            color: #004d40;
+            width: 100%;
+            max-width: 90vw;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .gov-info {
+            margin-bottom: 10px;
+        }
+
+        .gov-info img {
+            width:12%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+
+        .agreement-output {
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 8px;
+            color: #333;
+            font-family: 'Roboto', sans-serif;
+            font-size: 20px;
+            line-height: 1.3;
+            text-align: left;
+            margin: 0 auto;
+            max-width: 100%;
+        }
+
+        .signature {
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .signature img {
+            width: 100px;
+            max-width: 100%;
+            border: 1px solid #bdbdbd;
+            border-radius: 8px;
+            padding: 5px;
+        }
+
+        .agreement-footer {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.7rem;
+            color: #555;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Print-specific styles */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            .agreement-container, .agreement-container * {
+                visibility: visible;
+            }
+
+            .agreement-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                padding: 0; /* Remove padding for print */
+                margin: 0;
+                font-size: 8px; /* Smaller font size for print */
+                text-align: center;
+            }
+
+            .agreement-output {
+                font-size: 17px; /* Increased font size for print */
+                padding: 5px; /* Reduced padding */
+            }
+
+            .gov-info {
+                margin-bottom: 5px; /* Reduced margin */
+                font-size: 20px;
+            }
+
+            .signature {
+                margin-top: 5px; /* Reduced margin */
+            }
+
+            .signature img {
+                width: 60px; /* Smaller signature image for print */
+            }
+
+            .agreement-footer {
+                margin-top: 5px; /* Reduced margin */
+                font-size: 6px; /* Smaller font size for footer */
+            }
+
+            @page {
+                size: A4;
+                margin: 5mm; /* Further reduced margin to ensure content fits */
+            }
+
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Agreement Generator</h2>
+
+        <!-- Form for displaying data -->
+        <div id="formContainer">
+            <form id="dataForm">
+                <label for="partyOne">Party One Name:</label>
+                <div id="partyOne" class="info-box"></div>
+
+                <label for="partyTwo">Party Two Name:</label>
+                <div id="partyTwo" class="info-box"></div>
+
+                <label for="agreementDate">Agreement Date:</label>
+                <div id="agreementDate" class="info-box"></div>
+
+                <center><button type="button" onclick="generateAgreement()">Generate Agreement</button></center>
+            </form>
+        </div>
+
+        <!-- Agreement output section -->
+        <div class="agreement-container" id="agreementContainer">
+            <div class="gov-info">
+                <img src="https://i.pinimg.com/474x/6b/6e/62/6b6e62aa4a37ecfc57ac17bbf8c34f5c.jpg" alt="Ministry of Agriculture Logo">
+                <p><strong>Ministry of Agriculture & Farmers Welfare</strong></p>
+                <p><strong>Government of India</strong></p>
+            </div>
+            <div class="agreement-output" id="agreementOutput">
+                <h3>Generated Agreement</h3>
+                <p id="generatedAgreement"></p>
+
+                <div class="signature">
+                    <p>Digitally Signed by:</p>
+                    <img src="https://e7.pngegg.com/pngimages/983/684/png-clipart-electronic-signature-digital-signature-tom-hanks-angle-white-thumbnail.png" alt="Digital Signature">
+                    <p>Director</p>
+                    <p>Department of Agriculture and Farmers Welfare</p>
+                </div>
+
+                <div class="agreement-footer">
+                    <p>This document is an official agreement generated by the Ministry of Agriculture and Farmers Welfare.</p>
+                    <p>For any inquiries, please contact support@agri.gov.in.</p>
+                </div>
+            </div>
+            <button type="button" class="no-print" onclick="printContent()">Print Agreement</button>
+            <button type="button" class="payment-button no-print" onclick="goToPaymentPortal()">Go to Payment Portal</button>
+        </div>
+    </div>
+
+    <script>
+        let isAgreementGenerated = false;
+
+        const currentDate = new Date();
+        const day = currentDate.getDate();
+        const month = currentDate.getMonth() + 1;
+        const year = currentDate.getFullYear();
+        const formattedDate = `${day}/${month}/${year}`;
+        localStorage.setItem("agreementdate",formattedDate);
+        document.addEventListener('DOMContentLoaded', () => {
+            const partyOne = localStorage.getItem('farmername');
+            const partyTwo = localStorage.getItem('username');
+            console.log(partyOne)
+            const agreementDate = formattedDate;
+
+            document.getElementById('partyOne').innerText = partyOne || 'Party One';
+            document.getElementById('partyTwo').innerText = partyTwo || 'Party Two';
+            document.getElementById('agreementDate').innerText = agreementDate;
+        });
+
+        function generateAgreement() {
+            if (isAgreementGenerated) return;
+
+            const partyOne = localStorage.getItem('farmername') || 'Party One';
+            const partyTwo = localStorage.getItem('username') || 'Party Two';
+            console.log(partyOne);
+            const agreementDate = formattedDate;
+
+            const agreementText =
+                `This agreement is made between ${partyOne} and ${partyTwo} on ${agreementDate}.
+                The terms of this agreement are as follows:
+
+                Additional Terms and Conditions:
+                1. The price for land rental/lease is fixed at the time of this agreement and shall not vary during the term of the agreement.
+                2. The rental/lease period shall be determined and agreed upon by both parties at the time of signing.
+                3. Both parties agree to adhere to all local, state, and national regulations as set forth by the Ministry of Agriculture & Farmers Welfare, Government of India.
+                4. The lessor shall ensure that the land is in a condition suitable for agricultural use at the time of handover.
+                5. Any disputes arising from this agreement shall be resolved in accordance with the laws of India.
+
+                Signed,
+                ${partyOne} & ${partyTwo}`;
+
+            document.getElementById('generatedAgreement').innerText = agreementText;
+            document.getElementById('formContainer').style.display = 'none';
+            document.getElementById('agreementContainer').style.display = 'block';
+
+            isAgreementGenerated = true;
+        }
+
+        function printContent() {
+            window.print();
+        }
+
+        function goToPaymentPortal() {
+            window.location.href = 'payment.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmNect - Entry Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="form-container" id="formContainer">
+    <h2>Enter Farmer and Product Details</h2>
+    <form id="dataForm">
+        <!-- Farmer Details -->
+            <div class="form-row">
+                <div class="input-group">
+                    <label for="farmerId">Farmer ID:</label>
+                    <input type="text" id="farmerId" name="farmerId" required>
+                </div>
+                <div class="input-group">
+                    <label for="productID">product ID:</label>
+                    <input type="text" id="productId" name="productId" placeholder="Ex: 23tom01" required>
+                </div>
+            </div>
+
+
+            <label for="farmerName">Farmer's Name:</label>
+            <input type="text" id="farmerName" name="farmerName" required>
+
+            <label for="farmerContact">Farmer's Contact Number:</label>
+            <input type="tel" id="farmerContact" name="farmerContact" pattern="[0-9]{10}" required>
+
+            <!-- Split Location Details -->
+            <label for="farmerDistrict">Farmer's District:</label>
+            <input type="text" id="farmerDistrict" name="farmerDistrict" required>
+
+            <label for="farmerTown">Farmer's Town:</label>
+            <input type="text" id="farmerTown" name="farmerTown" required>
+
+            <label for="farmerState">Farmer state:</label>
+            <input type="text" id="farmerState" name="farmerState" required>
+
+            <!-- Product Details -->
+            <label for="productType">Product Type:</label>
+            <input type="text" id="productType" name="productType" required>
+
+            <label for="productStatus">Product Status:</label>
+            <input type="text" id="productStatus" name="productStatus" placeholder="inprogress / available / notavailable" required>
+
+            <label for="productQuality">Product Quality:</label>
+            <input type="text" id="productQuality" name="productQuality" required>
+
+            <label for="productQuantity">Product Quantity (in kg):</label>
+            <input type="number" id="productQuantity" name="productQuantity" required>
+
+            <label for="Price">Price:</label>
+            <input type="number" id="Price" name="Price" required>
+
+            <label for="marketPrice">Market Price:</label>
+            <input type="number" id="marketPrice" name="marketPrice" required>
+
+            <label for="productDescription">Product Description:</label>
+            <textarea id="productDescription" name="productDescription" rows="4"></textarea>
+            
+            <label for="entryDate">Date of Entry:</label>
+            <input type="date" id="entryDate" name="entryDate" required>
+
+            <!-- File Uploads -->
+            <label for="productImages">Upload Images:</label>
+            <input type="file" id="productImages" name="productImages" accept="image/*" multiple>
+
+            <label for="productVideos">Upload Videos:</label>
+            <input type="file" id="productVideos" name="productVideos" accept="video/*" multiple>
+
+        <center><button type="submit" class="action-button" >Submit</button></center>
+    </form>
+</div>
+<script src="index.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmNect - Dashboard and Entry Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .left-panel {
+            flex: 2;
+            margin-right: 20px;
+        }
+
+        .right-panel {
+            flex: 1;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            display: none; /* Initially hidden */
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .entry {
+            background-color: #e9ecef;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .entry:hover {
+            background-color: #dee2e6;
+        }
+
+        .entry p {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .progress-status {
+            display: none;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .details p {
+            font-size: 18px;
+            margin: 5px 0;
+        }
+
+        .entries-count {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .action-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .action-button:hover {
+            background-color: #0056b3;
+        }
+
+        .highlight {
+            font-weight: bold;
+            background-color: #007bff;
+            color: white;
+        }
+
+        .stage {
+            font-size: 18px;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .stage-registration {
+            background-color: #d1ecf1;
+        }
+
+        .stage-agreement {
+            background-color: #c3e6cb;
+        }
+
+        .stage-payment {
+            background-color: #f8d7da;
+        }
+
+        /* Form Styles */
+        .form-container {
+            display: none;
+            max-width: 1800px;
+            width:1000px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            
+            
+        }
+
+        .form-container label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+
+        .form-container input, .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-container .action-button {
+            width: 30%;
+            padding: 10px;
+            text-align: center;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .form-container .action-button:hover {
+            background-color: #218838;
+        }
+
+        /* Popup Styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease-in-out;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        .popup h2 {
+            color: #28a745;
+            margin-bottom: 15px;
+        }
+
+        .popup p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .continue-button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .continue-button:hover {
+            background-color: #218838;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Overlay for the popup */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="dashboardContainer">
+    <!-- Dashboard Section -->
+    <div class="left-panel" id="dashboard">
+        <h2>Entries Made</h2>
+        <div id="entriesList"></div>
+        <button class="action-button" id="addEntryBtn">Add New Entry</button>
+        <div class="right-panel" id="attenderDetails">
+            <h3>Attender Details</h3>
+            <p><strong>Name:</strong> John Doe</p>
+            <p><strong>Contact:</strong> +1234567890</p>
+            <p><strong>Email:</strong> john.doe@example.com</p>
+            <p><strong>Region:</strong> Central</p>
+        </div>
+    </div>
+
+    <!-- Attender Details Section -->
+    <div class="right-panel" id="attenderDetails">
+        <h3>Attender Details</h3>
+        <p><strong>Name:</strong> John Doe</p>
+        <p><strong>Contact:</strong> +1234567890</p>
+        <p><strong>Email:</strong> john.doe@example.com</p>
+        <p><strong>Region:</strong> Central</p>
+    </div>
+
+    <!-- Form Section -->
+    <div class="form-container" id="formContainer">
+        <h2>Enter Farmer and Product Details</h2>
+        <form id="dataForm">
+            <!-- Farmer Details -->
+            <label for="farmerId">Farmer ID:</label>
+            <input type="text" id="farmerId" name="farmerId" required>
+
+            <label for="farmerName">Farmer's Name:</label>
+            <input type="text" id="farmerName" name="farmerName" required>
+
+            <label for="farmerContact">Farmer's Contact Number:</label>
+            <input type="tel" id="farmerContact" name="farmerContact" pattern="[0-9]{10}" required>
+
+            <!-- Split Location Details -->
+            <label for="farmerDistrict">Farmer's District:</label>
+            <input type="text" id="farmerDistrict" name="farmerDistrict" required>
+
+            <label for="farmerTown">Farmer's Town:</label>
+            <input type="text" id="farmerTown" name="farmerTown" required>
+
+            <label for="farmerState">Farmer state:</label>
+            <input type="text" id="farmerState" name="farmerState" required>
+
+            <!-- Product Details -->
+            <label for="productType">Product Type:</label>
+            <input type="text" id="productType" name="productType" required>
+
+            <label for="productQuality">Product Quality:</label>
+            <input type="text" id="productQuality" name="productQuality" required>
+
+            <label for="productQuantity">Product Quantity (in kg):</label>
+            <input type="number" id="productQuantity" name="productQuantity" required>
+
+            <label for="Price">Market Price:</label>
+            <input type="number" id="Price" name="Price" required>
+
+            <label for="marketPrice">Market Price:</label>
+            <input type="number" id="marketPrice" name="marketPrice" required>
+
+            <label for="productDescription">Product Description:</label>
+            <textarea id="productDescription" name="productDescription" rows="4"></textarea>
+            
+            <label for="entryDate">Date of Entry:</label>
+            <input type="date" id="entryDate" name="entryDate" required>
+
+            <!-- File Uploads -->
+            <label for="productImages">Upload Images:</label>
+            <input type="file" id="productImages" name="productImages" accept="image/*" multiple>
+
+            <label for="productVideos">Upload Videos:</label>
+            <input type="file" id="productVideos" name="productVideos" accept="video/*" multiple>
+
+            <!-- Submit Button -->
+            <center><button type="submit" class="action-button">Submit</button></center>
+        </form>
+    </div>
+
+    <!-- Details Section -->
+    <div class="container" id="detailsContainer" style="display: none;">
+        <div class="left-panel">
+            <h2>Entry Details</h2>
+            <div id="entryDetails"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Popup and Overlay -->
+<div class="overlay" id="overlay"></div>
+<div class="popup" id="popup">
+    <h2>50% Progress Completed!</h2>
+    <p>Your entry has been successfully saved.</p>
+    <button class="continue-button" onclick="closePopup()">Continue</button>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        loadEntries();
+        document.getElementById('dashboard').style.display = 'block';
+        document.getElementById('formContainer').style.display = 'none';
+        document.getElementById('detailsContainer').style.display = 'none';
+        document.getElementById('attenderDetails').style.display = 'block';  // Show Attender Details
+    });
+
+    document.getElementById('addEntryBtn').addEventListener('click', function() {
+        document.getElementById('dashboard').style.display = 'none';
+        document.getElementById('formContainer').style.display = 'block';
+        document.getElementById('detailsContainer').style.display = 'none';
+    });
+
+    document.getElementById('dataForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const entry = {
+            farmerId: document.getElementById('farmerId').value,
+            farmerName: document.getElementById('farmerName').value,
+            farmerContact: document.getElementById('farmerContact').value,
+            farmerDistrict: document.getElementById('farmerDistrict').value,
+            farmerTown: document.getElementById('farmerTown').value,
+            productType: document.getElementById('productType').value,
+            productQuality: document.getElementById('productQuality').value,
+            productQuantity: document.getElementById('productQuantity').value,
+            marketPrice: document.getElementById('marketPrice').value,
+            productDescription: document.getElementById('productDescription').value,
+            progress: 'Registration'  // Default progress stage
+        };
+        //saveEntry(entry);
+        showPopup();
+    });
+
+    function saveEntry(entry) {
+        const entries = JSON.parse(localStorage.getItem('entries')) || [];
+        entries.push(entry);
+        localStorage.setItem('entries', JSON.stringify(entries));
+    }
+
+    function showPopup() {
+        document.getElementById('overlay').style.display = 'block';
+        document.getElementById('popup').style.display = 'block';
+    }
+
+    function closePopup() {
+        document.getElementById('popup').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none';
+        document.getElementById('formContainer').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        loadEntries();
+    }
+
+    function loadEntries() {
+        const entries = JSON.parse(localStorage.getItem('entries')) || [];
+        const entriesList = document.getElementById('entriesList');
+        entriesList.innerHTML = '';
+        entries.forEach((entry, index) => {
+            const entryDiv = document.createElement('div');
+            entryDiv.classList.add('entry');
+            entryDiv.innerHTML = `
+              <div id="entryDetails">
+    <p><strong>Farmer ID:</strong> ${entry.farmerId}&nbsp;&nbsp;&nbsp;
+       <strong>Farmer's Name:</strong> ${entry.farmerName}&nbsp;&nbsp;&nbsp;
+       <strong>Product Type:</strong> ${entry.productType}</p>
+    <p class="progress-status">Progress: ${entry.progress}</p>
+</div>
+            `;
+            entryDiv.addEventListener('click', function() {
+                showDetails(entry, index);
+            });
+            entriesList.appendChild(entryDiv);
+        });
+        const countDiv = document.createElement('div');
+        countDiv.classList.add('entries-count');
+        countDiv.textContent = `Total Entries: ${entries.length}`;
+        entriesList.appendChild(countDiv);
+    }
+
+    function showDetails(entry, index) {
+        document.getElementById('dashboard').style.display = 'none';
+        document.getElementById('formContainer').style.display = 'none';
+        document.getElementById('detailsContainer').style.display = 'flex';
+
+        const entryDetails = document.getElementById('entryDetails');
+        entryDetails.innerHTML = `
+            <div class="stage ${entry.progress === 'Registration' ? 'highlight stage-registration' : 'stage-registration'}">Registration</div>
+            <div class="stage ${entry.progress === 'Agreement' ? 'highlight stage-agreement' : 'stage-agreement'}">Agreement</div>
+            <div class="stage ${entry.progress === 'Payment' ? 'highlight stage-payment' : 'stage-payment'}">Payment</div>
+            <p><strong>Farmer ID:</strong> ${entry.farmerId}</p>
+            <p><strong>Farmer's Name:</strong> ${entry.farmerName}</p>
+            <p><strong>Product Type:</strong> ${entry.productType}</p>
+            <p><strong>Product Quality:</strong> ${entry.productQuality}</p>
+            <p><strong>Product Quantity:</strong> ${entry.productQuantity} kg</p>
+            <p><strong>Market Price:</strong> ${entry.marketPrice}</p>
+            <p><strong>Description:</strong> ${entry.productDescription}</p>
+        `;
+    }
+</script>
+<script src="index.js" type="module"></script>
+</body>
+</html>

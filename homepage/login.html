@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer and Trader Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin-top: 100px;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-height: 1000vh;
+            background-color: #FFFBE6;
+            color: #333;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background-color: #fff;
+            padding: 30px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .container h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Space between the buttons */
+            margin-bottom: 20px;
+            margin-top: 40px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-buttons .tablink {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            text-decoration: none; /* Remove underline */
+            transition: background-color 0.3s, transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-buttons .tablink i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        .nav-buttons .tablink:hover {
+            background-color: #388e3c;
+            transform: translateY(-2px);
+        }
+
+        .section {
+            display: none;
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .form-container, .login-container {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 6px;
+            display: block;
+            color: #555;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .action-button {
+            padding: 12px 20px;
+            background-color: #007bff; /* Elegant blue color */
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: inline-block;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            width: 50%;
+        }
+
+        .action-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        input:focus, textarea:focus {
+            border-color: #4caf50;
+            outline: none;
+            box-shadow: 0 0 6px rgba(76, 175, 80, 0.5);
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #388e3c;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #388e3c;
+            transform: translateY(-2px);
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px 0 0 10px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome to the FarmNect portal</h2>
+        <div class="nav-container">
+            <div class="nav-buttons">
+                <a href="javascript:void(0)" onclick="openSection(event, 'farmer')" class="tablink w3-bottombar w3-hover-light-grey">
+                    <i class="fas fa-seedling"></i> Farmer Login
+                </a>
+                <a href="javascript:void(0)" onclick="openSection(event, 'trader')" class="tablink w3-bottombar w3-hover-light-grey">
+                    <i class="fas fa-briefcase"></i> Trader Registration
+                </a>
+            </div>
+        </div>
+
+        <div id="farmer" class="section">
+            <div class="login-container">
+                <div class="form-container">
+                    <h2>Farmer Login</h2>
+                    <form id="userForm">
+                        <label for="name">Full Name:</label>
+                        <input type="text" id="name" name="name" required>
+
+                        <label for="sul">State Unified License Id:</label>
+                        <input type="text" id="sul" name="sulid" placeholder="Ex:23farmer01" required>
+                        
+                        <label for="gmail">Gmail:</label>
+                        <input type="email" id="gmail" name="gmail" placeholder="example@gmail.com" required>
+                        
+                        <label for="password">Password:</label>
+                        <input type="password" id="userpassword" name="password" placeholder="letters and numbers" required>
+                        
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="trader" class="section">
+            <h2>Trader Registration</h2>
+            <form id="registrationForm">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required><br>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required><br>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="letters and numbers" required><br>
+
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required><br>
+
+                <label for="address">Address:</label>
+                <textarea id="address" name="address" required></textarea><br>
+
+                <label for="businessName">Business Name:</label>
+                <input type="text" id="businessName" name="businessName" required><br>
+
+                <label for="licenseID">State Unified License ID:</label>
+                <input type="text" id="licenseID" name="licenseID" required><br>
+
+                <label for="businessType">Type of Business:</label>
+                <input type="text" id="businessType" name="businessType" placeholder="product / land" required><br>
+
+                <button type="submit" class="action-button">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openSection(evt, sectionId) {
+            var i, x, tablinks;
+            x = document.querySelectorAll('.section');
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            tablinks = document.querySelectorAll('.tablink');
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("w3-border-green");
+            }
+            document.getElementById(sectionId).style.display = "block";
+            evt.currentTarget.classList.add("w3-border-green");
+        }
+
+        // Show the Farmer Login section by default
+        document.querySelector('.nav-buttons .tablink').click();
+    </script>
+
+    <script src="login.js" type="module" defer></script>
+</body>
+</html>
